@@ -24,6 +24,7 @@ using UnityEngine;
 /// </summary>
 public class ObjectController : MonoBehaviour
 {
+
     /// <summary>
     /// The material to use when this object is inactive (not being gazed at).
     /// </summary>
@@ -103,6 +104,8 @@ public class ObjectController : MonoBehaviour
     /// </summary>
     public void OnPointerClick()
     {
+        Debug.Log("Pointer Click");
+
         TeleportRandomly();
     }
 

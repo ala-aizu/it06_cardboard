@@ -24,6 +24,9 @@ using UnityEngine;
 /// </summary>
 public class CameraPointer : MonoBehaviour
 {
+
+    public AudioSource audioToPlayOnClick;
+
     private const float _maxDistance = 10;
     private GameObject _gazedAtObject = null;
     public Vector2 turn;
@@ -67,7 +70,14 @@ public class CameraPointer : MonoBehaviour
         // Checks for screen touches.
         if (Google.XR.Cardboard.Api.IsTriggerPressed || Input.GetMouseButtonDown(0))
         {
-            _gazedAtObject?.SendMessage("OnPointerClick", SendMessageOptions.DontRequireReceiver);
+            if (_gazedAtObject != null)
+            {
+                if (_gazedAtObject.GetComponent<ObjectController>()!=null)
+                {
+                    _gazedAtObject?.SendMessage("OnPointerClick", SendMessageOptions.DontRequireReceiver);
+                    audioToPlayOnClick?.PlayOneShot(audioToPlayOnClick.clip, 1.0f);
+                }
+            }
         }
     }
 }
